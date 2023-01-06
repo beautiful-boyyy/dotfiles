@@ -1,0 +1,14 @@
+// vim: filetype=jsonc
+{
+  // cmp opt
+  "suggest.autoTrigger": "trigger",
+  "diagnostic.errorSign": "ⓧ",
+  "diagnostic.hintSign": "!",
+  "diagnostic.infoSign": "ℹ",
+  "diagnostic.level": "hint",
+  "coc.preferences.formatOnSave": false,
+
+  "Lua.telemetry.enable": false,
+  "sumneko-lua.enableNvimLuaDev": true,
+  "markdown-preview-enhanced.previewTheme": "one-dark.css",
+}
