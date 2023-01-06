@@ -200,4 +200,6 @@ nf ()
     fi
 }
 # nnn end
+
+# hugo completion
 autoload -U compinit; compinit
