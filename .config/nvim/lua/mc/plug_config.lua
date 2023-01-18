@@ -337,6 +337,7 @@ require('Comment').setup {
 }
 
 -- ================  coc.nvim  ================ --
+vim.g.coc_node_path = '/usr/local/bin/node'
 vim.g.coc_global_extensions = { 'coc-json', 'coc-tsserver', 'coc-eslint', 'coc-css', 'coc-sumneko-lua', 'coc-vimlsp',
   'coc-markdownlint', 'coc-webview', 'coc-svg', 'coc-translator', 'coc-yaml', 'coc-markdown-preview-enhanced', 'coc-toml', 'coc-html', 'coc-htmlhint', 'coc-html-css-support', 'coc-go' }
 
@@ -391,6 +392,9 @@ keyset({ 'v' }, '<leader>t', '<Plug>(coc-translator-pv)')
 local function Format(opts)
   vim.call('CocActionAsync', 'format')
 end
+
+-- coc-markdownlint
+keyset('n', 'mf', '<cmd>CocCommand markdownlint.fixAll<cr>')
 
 api.nvim_create_user_command('Format', Format, {})
 
