@@ -316,9 +316,6 @@ require("nnn").setup {
 
 keyset("n", "<leader>nn", "<cmd>NnnPicker %:p:h<CR>")
 
--- ================  nvim-transparent  ================ --
-require("transparent").setup({})
-
 -- ================  project.nvim  ================ --
 require("project_nvim").setup {}
 
@@ -339,7 +336,7 @@ require('Comment').setup {
 -- ================  coc.nvim  ================ --
 vim.g.coc_node_path = '/usr/local/bin/node'
 vim.g.coc_global_extensions = { 'coc-json', 'coc-tsserver', 'coc-eslint', 'coc-css', 'coc-sumneko-lua', 'coc-vimlsp',
-  'coc-markdownlint', 'coc-webview', 'coc-svg', 'coc-translator', 'coc-yaml', 'coc-markdown-preview-enhanced', 'coc-toml', 'coc-html', 'coc-htmlhint', 'coc-html-css-support', 'coc-go' }
+  'coc-markdownlint', 'coc-webview', 'coc-svg', 'coc-translator', 'coc-yaml', 'coc-markdown-preview-enhanced', 'coc-toml', 'coc-html', 'coc-htmlhint', 'coc-html-css-support', 'coc-go', 'coc-clangd' }
 
 local opts = { silent = true, noremap = true, expr = true, replace_keycodes = false }
 
@@ -347,6 +344,20 @@ function _G.check_back_space()
   local col = vim.fn.col('.') - 1
   return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
 end
+
+-- Use K to show documentation in preview window
+function _G.show_docs()
+    local cw = vim.fn.expand('<cword>')
+    if vim.fn.index({'vim', 'help'}, vim.bo.filetype) >= 0 then
+        vim.api.nvim_command('h ' .. cw)
+    elseif vim.api.nvim_eval('coc#rpc#ready()') then
+        vim.fn.CocActionAsync('doHover')
+    else
+        vim.api.nvim_command('!' .. vim.o.keywordprg .. ' ' .. cw)
+    end
+end
+keyset("n", "<C-d>", '<CMD>lua _G.show_docs()<CR>', {silent = true})
+
 
 -- Use Tab for trigger completion with characters ahead and navigate
 keyset("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', opts)

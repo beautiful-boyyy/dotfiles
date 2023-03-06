@@ -51,7 +51,7 @@ Plug 'Pocco81/true-zen.nvim'
 Plug 'folke/twilight.nvim'
 
 -- transparent
-Plug 'xiyaowong/nvim-transparent'
+-- Plug 'xiyaowong/nvim-transparent'
 
 -- theme
 Plug 'EdenEast/nightfox.nvim'

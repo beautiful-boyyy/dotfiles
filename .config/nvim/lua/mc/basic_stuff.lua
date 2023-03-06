@@ -53,11 +53,13 @@ function Run()
   if vim.opt.filetype:get() == 'javascript' then
     vim.cmd.split('term://node %')
   elseif vim.opt.filetype:get() == 'typescript' then
-    vim.cmd.split('term://tsc %')
+    vim.cmd.split('term://esr %')
   elseif vim.opt.filetype:get() == 'lua' then
     vim.cmd.split('term://lua %')
   elseif vim.opt.filetype:get() == 'markdown' then
     vim.cmd('CocCommand markdown-preview-enhanced.openPreview')
+  elseif vim.opt.filetype:get() == 'cpp' then
+    vim.cmd.split('term://clang++ -std=c++20 % -o %< && ./%<')
   end
 
 end
@@ -88,12 +90,12 @@ vim.api.nvim_create_autocmd("VimLeave", {
 })
 
 -- transparent
-function RemoveBg()
-  vim.api.nvim_set_hl(0, "Normal", { })
-  vim.api.nvim_set_hl(0, "NormalFloat", { })
-end
-
-vim.api.nvim_create_autocmd("ColorScheme", {
-    pattern = "*",
-    callback = RemoveBg,
-  })
+-- function RemoveBg()
+--   vim.api.nvim_set_hl(0, "Normal", { })
+--   vim.api.nvim_set_hl(0, "NormalFloat", { })
+-- end
+--
+-- vim.api.nvim_create_autocmd("ColorScheme", {
+--     pattern = "*",
+--     callback = RemoveBg,
+--   })
