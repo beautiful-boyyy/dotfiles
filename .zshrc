@@ -17,9 +17,6 @@ alias ra=ranger
 alias mongoStart="brew services start mongodb-community"
 alias mongoStop="brew services stop mongodb-community"
 alias wd="/Users/fgui/Software/Wudao-dict/wudao-dict/wd"
-alias ls=lsd
-alias la="lsd -la"
-alias lh="lsd -ah"
 alias python=python3
 alias init="nvim ~/.config/nvim/init.lua"
 alias alac="nvim ~/.config/alacritty/alacritty.yml"
@@ -28,6 +25,10 @@ alias icat="kitty +kitten icat"
 alias c=clear
 alias j=z
 alias config="/opt/homebrew/bin/git --git-dir $HOME/dotfiles --work-tree=$HOME"
+alias sc="kitty +kitten ssh -p 22 root@123.60.141.208"
+alias hd="hugo server -D"
+alias sc="source ~/.zshrc"
+
 # alias end
 
 
@@ -203,3 +204,7 @@ nf ()
 
 # hugo completion
 autoload -U compinit; compinit
+
+alias ls=lsd
+alias lh="lsd -ah"
+alias la="lsd -la"

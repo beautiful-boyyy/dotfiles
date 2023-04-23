@@ -4,7 +4,8 @@ local api = vim.api
 -- ================  nvim-treesitter  ================ --
 require 'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
-  ensure_installed = { "lua", "javascript", "typescript", "html", "css", "json", "vim", "tsx", "markdown", "yaml", "jsonc", "toml" },
+  ensure_installed = { "lua", "javascript", "typescript", "html", "css", "json", "vim", "tsx", "markdown", "yaml",
+    "jsonc", "toml" },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -56,10 +57,8 @@ require 'nvim-treesitter.configs'.setup {
   textobjects = {
     select = {
       enable = true,
-
       -- Automatically jump forward to textobj, similar to targets.vim
       lookahead = true,
-
       keymaps = {
         -- You can use the capture groups defined in textobjects.scm
         ["af"] = "@function.outer",
@@ -187,7 +186,8 @@ telescope.setup({
   extensions = {
     undo = {
       side_by_side = true, -- this is the default
-      mappings = { -- this whole table is the default
+      mappings = {
+                           -- this whole table is the default
         i = {
           ["<cr>"] = require("telescope-undo.actions").restore,
         },
@@ -221,13 +221,15 @@ keyset('n', '<leader>za', '<cmd>TZAtaraxis<cr>')
 require("true-zen").setup {
   modes = {
     ataraxis = {
-      padding = { -- padding windows
+      padding = {
+                  -- padding windows
         left = 52,
         right = 52,
         top = 0,
         bottom = 0,
       },
-      minimum_writing_area = { -- minimum size of main window
+      minimum_writing_area = {
+                               -- minimum size of main window
         width = 80,
         height = 44,
       },
@@ -235,12 +237,13 @@ require("true-zen").setup {
   },
   integrations = {
     tmux = false, -- hide tmux status bar in (minimalist, ataraxis)
-    kitty = { -- increment font size in Kitty. Note: you must set `allow_remote_control socket-only` and `listen_on unix:/tmp/kitty` in your personal config (ataraxis)
+    kitty = {
+                  -- increment font size in Kitty. Note: you must set `allow_remote_control socket-only` and `listen_on unix:/tmp/kitty` in your personal config (ataraxis)
       enabled = false,
       font = "+3"
     },
     twilight = true, -- enable twilight (ataraxis)
-    lualine = true -- hide nvim-lualine (ataraxis)
+    lualine = true   -- hide nvim-lualine (ataraxis)
   },
 }
 
@@ -298,18 +301,19 @@ local function open_in_vsplit(files)
 end
 
 local mappings = {
-  { "<C-t>", builtin.open_in_tab }, -- open file(s) in tab
-  { "<C-s>", builtin.open_in_split }, -- open file(s) in split
-  { "<C-v>", open_in_vsplit }, -- open file(s) in vertical split
-  { "<C-p>", builtin.open_in_preview }, -- open file in preview split keeping nnn focused
+  { "<C-t>", builtin.open_in_tab },       -- open file(s) in tab
+  { "<C-s>", builtin.open_in_split },     -- open file(s) in split
+  { "<C-v>", open_in_vsplit },            -- open file(s) in vertical split
+  { "<C-p>", builtin.open_in_preview },   -- open file in preview split keeping nnn focused
   { "<C-y>", builtin.copy_to_clipboard }, -- copy file(s) to clipboard
-  { "<C-w>", builtin.cd_to_path }, -- cd to file directory
-  { "<C-e>", builtin.populate_cmdline }, -- populate cmdline (:) with file(s)
+  { "<C-w>", builtin.cd_to_path },        -- cd to file directory
+  { "<C-e>", builtin.populate_cmdline },  -- populate cmdline (:) with file(s)
 }
 
 require("nnn").setup {
   picker = {
-    cmd = "nnn -Pp"
+    -- cmd = "nnn -Pp"
+    cmd = "nnn"
   },
   mappings = mappings
 }
@@ -336,7 +340,9 @@ require('Comment').setup {
 -- ================  coc.nvim  ================ --
 vim.g.coc_node_path = '/usr/local/bin/node'
 vim.g.coc_global_extensions = { 'coc-json', 'coc-tsserver', 'coc-eslint', 'coc-css', 'coc-sumneko-lua', 'coc-vimlsp',
-  'coc-markdownlint', 'coc-webview', 'coc-svg', 'coc-translator', 'coc-yaml', 'coc-markdown-preview-enhanced', 'coc-toml', 'coc-html', 'coc-htmlhint', 'coc-html-css-support', 'coc-go', 'coc-clangd' }
+  'coc-markdownlint', 'coc-webview', 'coc-svg', 'coc-translator', 'coc-yaml', 'coc-markdown-preview-enhanced',
+  'coc-toml', 'coc-html', 'coc-htmlhint', 'coc-html-css-support', 'coc-go', 'coc-clangd', '@yaegassy/coc-volar',
+  'coc-wxml', 'coc-prettier' }
 
 local opts = { silent = true, noremap = true, expr = true, replace_keycodes = false }
 
@@ -347,16 +353,17 @@ end
 
 -- Use K to show documentation in preview window
 function _G.show_docs()
-    local cw = vim.fn.expand('<cword>')
-    if vim.fn.index({'vim', 'help'}, vim.bo.filetype) >= 0 then
-        vim.api.nvim_command('h ' .. cw)
-    elseif vim.api.nvim_eval('coc#rpc#ready()') then
-        vim.fn.CocActionAsync('doHover')
-    else
-        vim.api.nvim_command('!' .. vim.o.keywordprg .. ' ' .. cw)
-    end
+  local cw = vim.fn.expand('<cword>')
+  if vim.fn.index({ 'vim', 'help' }, vim.bo.filetype) >= 0 then
+    vim.api.nvim_command('h ' .. cw)
+  elseif vim.api.nvim_eval('coc#rpc#ready()') then
+    vim.fn.CocActionAsync('doHover')
+  else
+    vim.api.nvim_command('!' .. vim.o.keywordprg .. ' ' .. cw)
+  end
 end
-keyset("n", "<C-d>", '<CMD>lua _G.show_docs()<CR>', {silent = true})
+
+keyset("n", "<C-d>", '<CMD>lua _G.show_docs()<CR>', { silent = true })
 
 
 -- Use Tab for trigger completion with characters ahead and navigate
@@ -410,7 +417,7 @@ keyset('n', 'mf', '<cmd>CocCommand markdownlint.fixAll<cr>')
 api.nvim_create_user_command('Format', Format, {})
 
 -- ================  FTerm.nvim  ================ --
-require'FTerm'.setup{}
+require 'FTerm'.setup {}
 keyset('n', '<A-i>', '<CMD>lua require("FTerm").toggle()<CR>')
 keyset('t', '<A-i>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>')
 
@@ -421,6 +428,21 @@ local fterm_new = fterm:new({
     cmd = "zsh",
 })
 
-vim.keymap.set({'n', 't'}, '<A-j>', function()
+keyset({'n', 't'}, '<A-j>', function()
     fterm_new:toggle()
 end)
+
+-- ================  nvim-colorizer.lua  ================ --
+require 'colorizer'.setup {
+  'css',
+  'less',
+  'scss',
+  html = {
+    mode = 'foreground',
+  }
+}
+
+-- ================  emmet-vim  ================ --
+vim.g.user_emmet_leader_key = '<C-F>'
+vim.g.user_emmet_mode = 'in'
+vim.g.user_emmet_prev_key = '<C-F>p'

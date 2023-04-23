@@ -69,10 +69,16 @@ Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 
 -- float term
 Plug 'numToStr/FTerm.nvim'
-
 -- coc.nvim
 Plug('neoclide/coc.nvim', { ['branch'] = 'release' })
 
 -- hugo
 Plug 'phelipetls/vim-hugo'
+
+-- colorizer
+Plug 'norcalli/nvim-colorizer.lua'
+
+-- emmet
+Plug 'mattn/emmet-vim'
+
 vim.call('plug#end')
